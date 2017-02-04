@@ -1,0 +1,45 @@
+---
+title: "Historial Académico"
+author: "Guillermina Tlapale"
+date: "3 de febrero de 2017"
+output: html_document
+---
+
+## Kárdex
+
+Matemáticas Básicas.......................08
+
+Problemas de Matemáticas Básicas...08
+
+Programación Actuarial I..................08
+
+Intro. a la Profeción Actuarial............06
+
+DHPC...........................................09
+
+Conceptos de Cálculo.....................07
+
+Teoría del Interés I..........................09
+
+Microeconomia...............................08
+
+Formación Humana y Social..............09
+
+Teoría del Interés II..........................08
+
+Contabilidad General.......................09
+
+Teoría de Ecuaciones......................09
+
+Lengua Extranjera I.........................08
+
+Programación Actuarial II..................06
+
+Sistema Financiero Méxicano............09
+
+Macroeconomía..............................08
+
+DHTIC...........................................09
+
+Reg. Acad. y Cient. del Esp..............08
+
