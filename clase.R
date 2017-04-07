@@ -222,7 +222,475 @@ y<-data.frame(a=1:10,b="a")
 dump(c("x","y"),file="data.R")
 source("data.R")
 
+#CLASE 24/02/2017
+#Conexiones
+str(file)
+ #desciption;nombre del archivo
+ #open;es un codigo que indica:
+con<-url("http://www.fcfm.buap.mx/")
+#funcion readLIne para leer 
+fc<-readLines(con,7)
+fc
+#subconjuntos:
+ #[ regresa un objeto de la misma clase origunal
+ #[[ regresa solo y solo un elemento
+r1<-c("a","b","c","d","e")
+r1
+r1[1]
+r1[4]
+r1[1:3]
+r1[3:5]
+r1[6:2]
+r1[1,3,5]   #no
+r1[1],[3],[5]  #no
+r1[1],r1[3],r1[3] #no
+r1[c(1,2,3,5)]    #si
+r1[r1>"b"]
+r1>"b"
+# exactamente igual "=="
+u<-r1=="c"
+u
+r1[u]
+# no se puede comparar porque son de tamaño distinto los vectores
+ # compara(c,d,c,d,c,d,c,d...... )
+u2<-r1==c("c","d")
+u2
+r1[u2]
+#lo correcto: ó=|, y=&
+u3<-r1=="c"|r1=="d"
+u3
+r1[u3]
+
+
+#vamos a crear una lista
+
+l<-list(foo=95:30,bar=0.6)
+#muetra como tal la lista
+a1<-l[1]
+# solo enseña los valores
+b1<-l[[1]]
+#Usar $= Usar [[]]
+c<-l$foo
+l["bar"]
+l[["bar"]]
+u5<-"bar"
+l[u5]
+l[[u5]]
+l$u5
+# l$u5 = l[["u5"]]
+#toma a u5 como variable y no existe 
+
+#PENDIENTE: checar diapositivas
+
+##CLASE 03/03/2017
+ #Remover valores faltantes
+airquality
+complete.cases(airquality)
+sum(complete.cases(airquality))
+sum(!complete.cases(airquality))
+airquality[complete.cases(airquality),]
+
+x<-airquality[complete.cases(airquality),]
+nrow(x)
+dim(x)[1]
+
+q<-1:4
+y<-6:9
+z<-2:3
+
+q+y
+q*y
+q>2
+q>=2
+q/y
+q+z
+
+a<-matrix(1:4,2,2)
+b<-matrix(rep(10,4),2,2)
+a
+b
+a*b
+#Para multiplicar matices
+a%*%b
+b%*%a
+
+#ESTRUCTURAS DE CONROL
+#permiten maanejar el flujo de la ejecucuoon de un programa, las más comunes son:
+#if,else
+#for
+#while:se ejecura un cliclo mientras se cumpla una condcion
+#repeat:ejecuta un ciclo infinito
+ #break
+#next
+#return
+
+#estuctura del control if-else
+#{equivale al then
+
+#}equivale al end if
+
+if (TRUE){
+        #instruccion
+        #instruccion
+        #instruccion
+}else {
+        #instrucciones
+}
+
+#Forma validda
+x1<-4
+if(x1>3){
+    y1<- 10
+}else{
+    y1<- 0
+}
+#pero tambien
+y1<- if(x1>3){
+    10
+}else{
+    0
+}
+#estructura del control for:
+for(i in 1:10){
+      print(i)
+}
+
+s<-c("a","b","c","d")
+for(i in 1:4){
+    print(x[i])
+}
+for (i in seq_along(x)){
+    print(x[i])
+}
+for(letra in x){
+    print (letra)
+}
+for(i in 1:4) print(x[1])
+
+# los ciclos for pueden ser animados
+x<-matrix(1:6,2,3)
+for(i in seq_len(nrow(x))){
+    for(j in seq_len(ncol(x))){
+        print(x[i,j])
+    }
+}
+#CLASE 07/MARZO/2017
+
+contador<-1
+while(contador < 10){
+      print(contador)
+      contador<-contador+1
+}
+
+for(i in 0:9){
+          print(i)
+}
+
+i<-0
+while(TRUE&&i<=100000){
+          print(i)
+          i<-i+1
+}
+
+?rbinom
+z<-5
+contador<-1
+while((z>3&&z<10)&& contador<100){
+        print(z)
+        moneda<-rbinom(1,1,0.5)
+        if (moneda==1){
+              z<-z+1
+        }else{
+              z<-z-1
+        }
+        contador<-contador+1
+}
+print(contador)
+
+#actividad
+z<-5
+contador<-1
+x<-c()
+while((z>=3&&z<=10)&& contador<100){
+   x<-c(x,z)
+  moneda<-rbinom(1,1,0.5)
+  if (moneda==1){
+    z<-z+1
+  }else{
+    z<-z-1
+  }
+  contador<-contador+1
+}
+print(contador)
+x
+#Actividad 2
+
+#set.seed para seudo aleatorios(no son números al azar)
+set.seed(1)
+len<-c()
+for(i in 1:100){
+  z<-5
+  contador<-1
+  x<-c()
+  while((z>=3&&z<=10)&& contador<100){
+    x<-c(x,z)
+    moneda<-rbinom(1,1,0.5)
+    if (moneda==1){
+      z<-z+1
+    }else{
+      z<-z-1
+    }
+    contador<-contador+1
+  }
+#length= longitud del vector
+    len<-c(len,length(x))
+}
+len 
+hist(len)
+#clase 14/marzo/2017
+   #funcion plot grafica
+plot(x,type="l")
+
+#se divide entre 10 para suavisarla
+x<-(-30:30)/10
+y<-x^2+5
+
+plot(y,type="l")
+
+#estructura break
+for(i in 1:50){
+      if (i<=25){
+            next
+      }
+      if (i>40){
+            break
+      }
+      print(i)
+}
+
+#Crear funciones
+  #sumar dos números
+  #Usamos FUNCTION para que se guarde como funcion y no como variable
+suma2<-function(x,y){
+      x+y
+}
+
+dump("suma2",file = "suma2.R")
+source("suma2.R")
+
+
+#ejercicio
+d<-data.frame(foo=1:4,bar=1:4)
+d
+nrow(d)
+ncol(d)
+
+x<-()
+for (i in i<=nrow(d))
+  x<-x+y
 
 
 
+promedio<-function(x,y){
+  x/y
+}
+# no salio el ejercicio
+
+promedioCol<-function(x,quitarNA=T){
+    Cols<-ncol(x)
+    v<-c()
+    for(i in 1:Cols){
+          #sum(x[,i])/nrow(x[,i])
+          v<-c(v,mean(x[,i],na.rm=quitarNA))
+    }
+    v
+}
+
+promedioCol(airquality)
+
+
+#clase 17 /marzo/ 2017
+ #evaluación perezosa
+
+#el arumento "..."
+
+
+x<-(-300:300)/100
+y<-x^2+5
+plot(x,y, type="l")
+
+miplot<-function(x,y,ana="l",...){
+    plot(x,y,type=ana,...)
+
+}
+miplot(x,y,main="parábola",sub="y=x^2+5",
+       xlab="Horizontal", ylab="Vertical",
+       col="red")
+?paste
+
+#Scoping Rules
+  #lm
+  #lm<-function(x){x*x}
+  #lm 
+  #rm(lm)
+  #lm 
+
+f<-function(x,y){
+    x^2+y/z
+}
+
+hacer.potencia<- function(n){
+    potencia<-function(x){
+      x^n
+    }
+    potencia
+}
+
+#clase 21/ marzo/ 2017
+    #sangria y así
+    #Fechas
+x<-as.Date("1970-01-01")
+x
+unclass(x)
+# es =0 porque han pasado 0 dias
+unclass(as.Date("1970-01-02"))
+# es =1 porque han pasado 1 dias desde la fecha inicial
+
+x<-as.Date("1996-04-29")
+unclass(x)
+y<-as.Date("1995-05-14")
+unclass(y)
+unclass(y-x)
+
+#funciones de ciclo
+
+lapply
+function(X,FUN,...)
+{
+    FUN<-match.fun(FUN)
+    if(!is.vector(X)||is.object(X))
+        X<-as.list(X)
+    .Internal(lapply(X,FUN))
+}
+#ejemplo de la funcion lapply
+x<-list(a=1:5,b=rnorm(10000))
+lapply(x,mean)
+
+# otro ejemplo
+x<-list(a=1:5,b=rnorm(10),c=rnorm(10,1),d=rnorm(10,2))
+lapply(x,mean)
+#un ejemplo; variables aleatorias uniformes
+x<-1:4
+lapply(x,runif)
+#ejemplo con más argumentos
+x<-1:4
+lapply(x,runif,max=15,min=5)
+
+#clase 23/marzo/2017
+#sapply
+ #regresa un vector o una matriz dependiendo de su Dim
+ #o regresa la misma lista que lapply si los elementos tienen distina Dim.
+x<-list(a=1:5,b=rnorm(10),c=rnorm(10,3),d=rnorm(10,5))
+lapply(x,mean)
+sapply(x,mean)
+
+#apply
+x<-matrix(rnorm(200),20,10)
+apply(x,2,mean)
+apply(x,1,sum)
+
+x<- matrix(rnorm(200),20,10)
+apply(x,1,quantile,probs=c(0.25,0.75))
+
+# 
+
+a<-array(rnorm(2*2*10),c(2,2,10))
+apply(a,c(1,2),mean)
+apply(a,c(2,3),mean)
+
+rowMeans(a,dims = 2)
+
+###########clase de 24/marzo/2017
+ #install.packeges("swirl")
+ #library(swirl")
+
+install_from_swirl("R_Programming")
+# se tienen que borrar todas las variables antes de onicciar: rm(list = ls())
+# Se tiene que pone swirl() para "abrir el programa"
+# Bye pra salir 
+#cada que "inicio" tengo que volver a poner mi nombre
+
+
+    #CLASE 30/MARZO/2017
+ #función mapply
+list(rep(1,4),rep(2,3),rep(3,2),rep(4,1))
+mapply(rep,1:4,4:1)
+
+ld
+
+#Vectoriza una función
+    #ruido blanco
+noise<-function(n,mean,sd){
+    rnorm(n,mean,sd)
+}
+#sd= desviacion estandar; mean:media O promedio?
+noise(5,1,2)
+mapply(noise,1:5,1:5,2)
+#rnorm= para generar numeros aleatorios
+#runir= genera numeros aleatorios uniformes
+
+#funcion tapply
+#muestra los resultados en una tabla
+x<-c(rnorm(10),runif(10),rnorm(10,1))
+
+f<-gl(3,10)
+f
+
+tapply(x,f,mean)
+#Da el promedio de los primeros 10 num;prom 10 siguientes....
+
+#simplify=F lo pone como lista
+#simplify=T lo pone como data frame
+
+
+#SPLIT:toma un objeto y crea tantos ....separa por grupos
+split(x,f)
+lapply(split(x,f),mean)
+
+#clase 31/marzo/1017
+library(datasets)
+ #ejemplo de función tapply
+airquality
+ #encontrar la temperatura promedio por mes
+
+tapply(airquality$Temp,airquality$Month,mean,simplify = T)
+
+sapply(split(airquality$Temp,airquality$Month),mean)
+
+split(airquality$Temp,airquality$Month)
+
+#lllll
+
+s<-split(airquality,airquality$Month)
+s
+lapply(s,function(x) colMeans(x[,1:3],na.rm = T))
+sapply(s,function(x) colMeans(x[,1:4],na.rm = T))
+
+# split a más de un nivel
+x<- rnorm(10)
+f1<-gl(2,5)
+f2<-gl(5,2)
+f1
+
+f2
+
+interaction(f1,f2)
+
+x
+str(split(x,list(f1,f2)))
+
+#MANEJO DE ERRORES
+?options
+options(error = recover)
+read.csv("noexiste")
 
