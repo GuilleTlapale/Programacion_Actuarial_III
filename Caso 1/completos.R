@@ -19,7 +19,7 @@ completos <- function(directorio,id=1:332){
     m <- z[todos,]
     n <- nrow(m)
     
-    if (contador=0){ 
+    if (contador==0){ 
       x2 <- i
       x3 <- n
       }
